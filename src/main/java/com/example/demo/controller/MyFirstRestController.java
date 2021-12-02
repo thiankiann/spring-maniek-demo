@@ -30,11 +30,16 @@ public class MyFirstRestController {
  *  → create endpoint which get from a user his name (as @RequestParam )and will give it back but converted to upper case
  * => zrobimy to w taki sposob, ze jesli uzytkownik w adresie podal parametr myName to żeby to imie bylo automatycznie wstawiane do argumentu w naszej metodce
  * (tzn. Wpisujac http://localhost:8080/convert-name?myName=Mariusz → otrzymamy MARIUSZ )
+ * Exc.1'
+ * -> ad logger which print in-put parameter (name) and result
  */
 @GetMapping("/convert-name")
     public String convertNameForUpperCase(@RequestParam("myName") String name) {
 
         String result = name.toUpperCase();
+
+        logger.info(" in-put: [{}] , result [{}]" , name, result);
+
         return result;
     }
 }
