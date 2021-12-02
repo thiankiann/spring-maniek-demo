@@ -36,7 +36,7 @@ public class MyFirstRestController {
 @GetMapping("/convert-name")
     public String convertNameForUpperCase(@RequestParam("myName") String name) {
 
-        String result = name.toUpperCase();
+        String result = MyService.convertToUpperCase(name);
 
         logger.info(" in-put: [{}] , result [{}]" , name, result);
 
