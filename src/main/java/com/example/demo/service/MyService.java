@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.repository.MyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -11,12 +12,22 @@ import java.util.Objects;
 public class MyService {
     private static final Logger logger = LoggerFactory.getLogger(MyService.class);
 
-    private final MyRepository myRepository;
+    private MyRepository myRepository;
+
 
     public MyService() {
-        myRepository = new MyRepository();
     }
-/**
+
+    public MyService(MyRepository myRepository) {
+        this.myRepository = myRepository;
+
+    }
+    @Autowired
+    public void SetMyService(MyRepository myRepository) {
+        this.myRepository = myRepository;
+        logger.info("Setting MyRepository dependency into MyService");
+    }
+    /**
  * Exc. 2
  * create our own method convertToUpperCase() in service layer and use it in controller layer
  * add logger
