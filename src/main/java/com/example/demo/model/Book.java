@@ -1,9 +1,15 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Book {
 
     private Long id;
+
+    @JsonProperty("author")
     private String author;
+
+    @JsonProperty("title")
     private String title;
 
     public Book(Long id, String author, String title) {
