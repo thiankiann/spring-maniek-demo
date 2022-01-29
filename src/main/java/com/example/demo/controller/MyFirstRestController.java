@@ -33,7 +33,7 @@ public class MyFirstRestController {
  * Exc.1'
  * -> ad logger which print in-put parameter (name) and result
  */
-@GetMapping("/convert-name")
+    @GetMapping("/convert-name")
     public String convertNameForUpperCase(@RequestParam("myName") String name) {
 
         String result = MyService.convertToUpperCase(name);
@@ -42,4 +42,5 @@ public class MyFirstRestController {
 
         return result;
     }
+
 }
