@@ -39,4 +39,23 @@ public class BookController {
 
         return bookService.saveBook(toSave);
     }
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable("id") Long id) {
+        logger.info("deleting book by id: [{}]", id);
+
+        bookService.deleteBookBy(id);
+    }
+    //Update (replace)
+    @PutMapping
+    public Book replaceBook(@PathVariable Long id , @RequestBody Book toReplace){
+        logger.info("replace book with id: [{}] for new one: [{}]",id, toReplace);
+
+        return bookService.replaceBook(id, toReplace);
+    }
+    @PatchMapping
+    public Book updateBook(@PathVariable("id") Long id,@RequestBody Book toUpdate){
+        logger.info("replace book with new attributes: [{}]", toUpdate);
+
+        return bookService.updateBookWithAttributes(id, toUpdate);
+    }
 }
