@@ -64,9 +64,9 @@ public class BookService {
         return toSave;
     }
 
-    public boolean deleteBookBy(Long id) {
+    public boolean deleteBookById(Long id) {
         boolean result = bookRepository.deleteBookWithId(id);
-        logger.info("trying to delete book with id: [{}], result; [{}]", id);
+        logger.info("trying to delete book with id: [{}],  [{}]",id , result);
         return result;
     }
 

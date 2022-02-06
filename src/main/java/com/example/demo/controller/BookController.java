@@ -4,8 +4,10 @@ import com.example.demo.model.Book;
 import com.example.demo.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -34,16 +36,34 @@ public class BookController {
         return bookService.finfBooksById(id);
     }
     @PostMapping
-    public Book addBook(@RequestBody Book toSave) {
+    public ResponseEntity<Book> addBook(@RequestBody Book toSave) {
         logger.info("adding new book [{}]", toSave);
 
-        return bookService.saveBook(toSave);
+      //  return bookService.saveBook(toSave);  // before we change Book to ResponseEntity<Book>
+        var newBook = bookService.saveBook(toSave);
+        return ResponseEntity.created(URI.create("books/" + newBook.getId()))
+                .body(newBook);
     }
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteBook(@PathVariable("id") Long id) {
         logger.info("deleting book by id: [{}]", id);
+            // when delete = true  then -> Resource Code = 204 (-> noContent() )
+            // hene delete = false then -> RC = 4xx (
 
-        bookService.deleteBookBy(id);
+        boolean deleted = bookService.deleteBookById(id);
+
+        ResponseEntity<Void> result = ResponseEntity.notFound().build();
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }
+        return result;
+     /* version before optimisation
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.badRequest().build();
+        }
+      */
     }
     //Update (replace)
     @PutMapping
