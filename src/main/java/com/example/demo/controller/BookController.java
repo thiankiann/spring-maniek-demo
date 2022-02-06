@@ -4,6 +4,7 @@ import com.example.demo.model.Book;
 import com.example.demo.service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,10 +41,25 @@ public class BookController {
         return bookService.saveBook(toSave);
     }
     @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteBook(@PathVariable("id") Long id) {
         logger.info("deleting book by id: [{}]", id);
+            // when delete = true  then -> Resource Code = 204 (-> noContent() )
+            // hene delete = false then -> RC = 4xx (
 
-        bookService.deleteBookBy(id);
+        boolean deleted = bookService.deleteBookById(id);
+
+        ResponseEntity<Void> result = ResponseEntity.notFound().build();
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }
+        return result;
+     /* version before optimisation
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }else {
+            return ResponseEntity.badRequest().build();
+        }
+      */
     }
     //Update (replace)
     @PutMapping
