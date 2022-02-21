@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.BookNotFoundException;
 import com.example.demo.service.MyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,5 +43,10 @@ public class MyFirstRestController {
 
         return result;
     }
+    @GetMapping("/throw-exception")
+    public void throwException(){
+        logger.info("throwing exception from controller ");
 
+        throw new BookNotFoundException();
+    }
 }

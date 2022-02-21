@@ -44,7 +44,7 @@ public class BookService {
                 .stream()
                 .filter(book -> book.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new BookNotFoundException(String.format("No book with id:[%]", id)));
+                .orElseThrow(() -> new BookNotFoundException(String.format("No book with id:[%d]", id)));
     }
 
     public Book saveBook(Book toSave) {
@@ -64,9 +64,9 @@ public class BookService {
         return toSave;
     }
 
-    public boolean deleteBookBy(Long id) {
+    public boolean deleteBookById(Long id) {
         boolean result = bookRepository.deleteBookWithId(id);
-        logger.info("trying to delete book with id: [{}], result; [{}]", id);
+        logger.info("trying to delete book with id: [{}],  [{}]",id , result);
         return result;
     }
 
