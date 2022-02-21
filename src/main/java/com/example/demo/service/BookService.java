@@ -44,7 +44,7 @@ public class BookService {
                 .stream()
                 .filter(book -> book.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new BookNotFoundException(String.format("No book with id:[%]", id)));
+                .orElseThrow(() -> new BookNotFoundException(String.format("No book with id:[%d]", id)));
     }
 
     public Book saveBook(Book toSave) {
