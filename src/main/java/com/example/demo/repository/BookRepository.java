@@ -15,9 +15,9 @@ public class BookRepository {
 
     public BookRepository() {
         List<Book> someBooks = List.of(
-                new Book(1L,"Henryk Sienkiewicz","Potop"),
-                new Book(2L,"Henryk Sienkiewicz","Pan Wolodyjowski"),
-                new Book(3L,"Henryk Sienkiewicz","Quo Vadis")
+                new Book(1L,"Henryk", "Sienkiewicz","Potop"),
+                new Book(2L,"Henryk", "Sienkiewicz","Pan Wolodyjowski"),
+                new Book(3L,"Henryk", "Sienkiewicz","Quo Vadis")
         );
         this.books = new ArrayList<>(someBooks);
         logger.info("book repository initialized wit books {}", books);

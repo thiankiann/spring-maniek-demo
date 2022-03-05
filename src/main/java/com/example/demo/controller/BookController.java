@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.BookDto;
 import com.example.demo.dto.ExceptionResponse;
 import com.example.demo.exception.BookNotFoundException;
 import com.example.demo.model.Book;
@@ -30,20 +31,20 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getAllBooks() {
+    public List<BookDto> getAllBooks() {
 
         logger.info("getAllBooks()");
 
         return bookService.findAllBooks();
     }
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable("id") Long id) {
+    public BookDto getBookById(@PathVariable("id") Long id) {
         logger.info("find book by id [{}]", id);
 
         return bookService.finfBooksById(id);
     }
     @PostMapping
-    public ResponseEntity<Book> addBook(@RequestBody Book toSave) {
+    public ResponseEntity<BookDto> addBook(@RequestBody BookDto toSave) {
         logger.info("adding new book [{}]", toSave);
 
       //  return bookService.saveBook(toSave);  // before we change Book to ResponseEntity<Book>
@@ -74,13 +75,13 @@ public class BookController {
     }
     //Update (replace)
     @PutMapping("/{id}")
-    public Book replaceBook(@PathVariable Long id , @RequestBody Book toReplace){
+    public BookDto replaceBook(@PathVariable Long id , @RequestBody BookDto toReplace){
         logger.info("replace book with id: [{}] for new one: [{}]",id, toReplace);
 
         return bookService.replaceBook(id, toReplace);
     }
     @PatchMapping
-    public Book updateBook(@PathVariable("id") Long id,@RequestBody Book toUpdate){
+    public BookDto updateBook(@PathVariable("id") Long id,@RequestBody BookDto toUpdate){
         logger.info("replace book with new attributes: [{}]", toUpdate);
 
         return bookService.updateBookWithAttributes(id, toUpdate);

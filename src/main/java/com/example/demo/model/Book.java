@@ -6,15 +6,16 @@ public class Book {
 
     private Long id;
 
-    @JsonProperty("author")
-    private String author;
 
-    @JsonProperty("title")
+    private String name;
+    private String surname;
+
     private String title;
 
-    public Book(Long id, String author, String title) {
+    public Book(Long id, String name, String surname, String title) {
         this.id = id;
-        this.author = author;
+        this.name = name;
+        this.surname = surname;
         this.title = title;
     }
 
@@ -25,16 +26,24 @@ public class Book {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getAuthor() {
-        return author;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getTitle() {
@@ -49,7 +58,8 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + id +
-                ", author='" + author + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 ", title='" + title + '\'' +
                 '}';
     }
