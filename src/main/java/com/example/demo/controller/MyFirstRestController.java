@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.BookNotFoundException;
 import com.example.demo.service.MyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class MyFirstRestController {
  * Exc.1'
  * -> ad logger which print in-put parameter (name) and result
  */
-@GetMapping("/convert-name")
+    @GetMapping("/convert-name")
     public String convertNameForUpperCase(@RequestParam("myName") String name) {
 
         String result = MyService.convertToUpperCase(name);
@@ -41,5 +42,11 @@ public class MyFirstRestController {
         logger.info(" in-put: [{}] , result [{}]" , name, result);
 
         return result;
+    }
+    @GetMapping("/throw-exception")
+    public void throwException(){
+        logger.info("throwing exception from controller ");
+
+        throw new BookNotFoundException();
     }
 }
