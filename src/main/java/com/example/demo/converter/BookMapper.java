@@ -4,9 +4,11 @@ import com.example.demo.dto.BookDto;
 import com.example.demo.model.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import static java.util.Objects.nonNull;
 
+@Component
 public class BookMapper implements Mapper<Book, BookDto> {
 
     private static final String space = " ";
