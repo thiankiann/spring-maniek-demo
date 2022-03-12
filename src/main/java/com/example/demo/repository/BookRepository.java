@@ -11,6 +11,14 @@ import java.util.List;
 public class BookRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(BookRepository.class);
+
+    private final BookCrudRepository bookCrudRepository;
+
+    public BookRepository(BookCrudRepository bookCrudRepository) {
+        this.bookCrudRepository = bookCrudRepository;
+    }
+
+    /*   // lista, ktora wykozytywalismy zanim wdrozylismy DB i interface BoookCrudRepository (L13 5 min. Screen Recording (14-03-2021 11-40-45)
     private List<Book> books;
 
     public BookRepository() {
@@ -22,12 +30,25 @@ public class BookRepository {
         this.books = new ArrayList<>(someBooks);
         logger.info("book repository initialized wit books {}", books);
     }
-
+*/
     public List<Book> findAllBooks() {
-        return books;
+      /*  var result = new ArrayList<Book>();
+        bookCrudRepository.findAll()
+                .forEach(book -> result.add(book)); */     // we change it for one  line below
+        var result = bookCrudRepository.findAllBooks();
+
+        logger.info("Number of found books: [{}]",result.size());
+        logger.info("Found books: {}",result);
+        return result;
     }
 
     public boolean deleteBookWithId(Long id) {
-        return books.removeIf(book -> book.getId().equals(id));
+       // return books.removeIf(book -> book.getId().equals(id)); // version before CrudRepository implementation
+
+        boolean exists = bookCrudRepository.existsById(id);
+        if (exists) {
+            bookCrudRepository.deleteById(id);
+        }
+        return exists;
     }
 }
